@@ -17,10 +17,10 @@ export default {
     },
     migrations: {
       tableName: "knex_migrations",
-      directory: "./migrations",
+      directory: "migrations",
     },
     seeds: {
-      directory: "./seeds",
+      directory: "seeds",
     },
   }
 };
