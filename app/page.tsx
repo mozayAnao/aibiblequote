@@ -5,11 +5,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [quotation, setQuotation] = useState("");
+  const [quotation, setQuotation] = useState<{title: string, text: string}>();
   const [isStreaming, setIsStreaming] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder>();
   const [ws, setWs] = useState<WebSocket>();
-
 
   const startStreaming = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -32,7 +31,7 @@ export default function Home() {
       setIsStreaming(false);
     }
   };
-console.log(quotation);
+  console.log(quotation);
   useEffect(() => {
     const websocket = new WebSocket("ws://localhost:8080");
     setWs(websocket);
@@ -61,11 +60,8 @@ console.log(quotation);
         <div className="h-full w-full flex flex-col justify-between items-center">
           <h1 className="header text-center">VerseCatch</h1>
           <div className="responseContainer">
-            <h2 className="verseTitle mb-4">Romans 8:28</h2>
-            <p className="verseText">
-              And we know that in all things God works for the good of those who
-              love him, who have been called according to his purpose.
-            </p>
+            <h2 className="verseTitle mb-4">{quotation?.title}</h2>
+            <p className="verseText">{quotation?.text}</p>
           </div>
           <div className="actionArea w-1/2 flex flex-col items-center ">
             <div className="caption flex flex-col gap-4 items-center">
